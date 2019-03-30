@@ -8,7 +8,7 @@ HOST = '127.0.0.1'
 PORT = 65432 
 
 # definisikan ukuran buffer untuk mengirimkan pesan
-buffer = 7
+buffer = 4096
 
 # buat socket bertipe TCP
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -28,11 +28,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 	    print('Connected by', addr)
 
 		# menerima data berdasarkan ukuran buffer
+	    data = conn.recv(buffer)
 	    from_client = ''
 		
 		# menampilkan pesan yang diterima oleh server menggunakan print
 	    while True:
-	        data = conn.recv(4096)
 	        if not data: break
 	        from_client += data
 	        print(from_client)

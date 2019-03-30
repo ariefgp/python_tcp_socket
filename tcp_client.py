@@ -8,10 +8,10 @@ HOST = '127.0.0.1'
 PORT = 65432 
 
 # definisikan ukuran buffer untuk mengirimkan pesan
-buffer = 7
+buffer = 4096
 
 # definisikan pesan yang akan disampaikan
-pesan = "received pesan"
+pesan = "I am CLIENT\n"
 
 # buat socket TCP
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -20,10 +20,10 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
 
 # kirim pesan ke server
-s.send("I am CLIENT\n")
+s.send(pesan)
 
 # terima pesan dari server
-from_server = s.recv(4096)
+from_server = s.recv(buffer)
 
 # tampilkan pesan/reply dari server
 print from_server
